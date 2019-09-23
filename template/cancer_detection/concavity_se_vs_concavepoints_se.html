@@ -1,0 +1,159 @@
+{%extends 'cancer_detection/base.html'%}
+{%load static%}
+{%block content%}
+<div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">Concavity-se vs Concavepoints-se</h3>
+                                        <br>
+                                        <div class="recent-report__chart">
+                                            <canvas id="line-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="au-card chart-percent-card">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 tm-b-5">Concavity-se vs Concavepoints-se</h3><br>
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-12">
+                                                <div class="percent-chart">
+                                                    <canvas id="percent-chart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2019. All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<script>
+  var data1  = eval("{{concavity_se}}")
+  var data2  = eval("{{concave_points_se}}")
+  const brandProduct = 'rgba(0,181,233,0.8)'
+  const brandService = 'rgba(0,173,95,0.8)'
+  var elements = 10
+  var ctx = document.getElementById("line-chart");
+  if (ctx) {
+    ctx.height = 250;
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels:data1,
+        datasets: [
+          {
+            label: 'Concave Points Se',
+            backgroundColor: brandService,
+            borderColor: 'transparent',
+            pointHoverBackgroundColor: '#fff',
+            borderWidth: 0,
+            data: data2
+          }
+        ]
+      },
+      options: {
+        maintainAspectRatio: true,
+        legend: {
+          display: false
+        },
+        responsive: true,
+        scales: {
+          xAxes: [{
+            gridLines: {
+              drawOnChartArea: true,
+              color: '#f2f2f2'
+            },
+            ticks: {
+              fontFamily: "Poppins",
+              fontSize: 12
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              fontFamily: "Poppins",
+              fontSize: 12,
+            },
+            gridLines: {
+              display: true,
+              color: '#f2f2f2'
+
+            }
+          }]
+        },
+        elements: {
+          point: {
+            radius: 0,
+            hitRadius: 10,
+            hoverRadius: 4,
+            hoverBorderWidth: 3
+          }
+        }
+      }
+    });
+  }
+
+
+    // Percent Chart
+    var ctx = document.getElementById("percent-chart");
+    if (ctx) {
+      ctx.height = 280;
+      var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          datasets: [
+            {
+              label: "My First dataset",
+              data: data1,
+              backgroundColor: [
+                "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"
+              ],
+              borderWidth: [
+                0, 0
+              ],
+              hoverBorderColor: [
+                'transparent',
+                'transparent'
+              ]
+            }
+          ],
+          labels:data2
+        },
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          cutoutPercentage: 55,
+          animation: {
+            animateScale: true,
+            animateRotate: true
+          },
+          legend: {
+            display: false
+          },
+          tooltips: {
+            titleFontFamily: "Poppins",
+            xPadding: 15,
+            yPadding: 10,
+            caretPadding: 0,
+            bodyFontSize: 16
+          }
+        }
+      });
+    }
+
+</script>
+{%endblock%}

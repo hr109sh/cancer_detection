@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="{%static 'vendor/chartjs/Chart.bundle.min.js'%}"></script>
+
+    <!-- Title Page-->
+    <title>Cancer Detection</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{%static 'css/font-face.css'%}" rel="stylesheet" media="all">
+    <link href="{%static 'vendor/font-awesome-4.7/css/font-awesome.min.css'%}" rel="stylesheet" media="all">
+    <link href="{%static 'vendor/font-awesome-5/css/fontawesome-all.min.css'%}" rel="stylesheet" media="all">
+    <!-- <link href="{static% 'vendor/mdi-font/css/material-design-iconic-font.min.css'%}" rel="stylesheet" media="all"> -->
+
+    <!-- Bootstrap CSS-->
+    <link href="{%static 'vendor/bootstrap-4.1/bootstrap.min.css'%}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{%static 'vendor/animsition/animsition.min.css'%}" rel="stylesheet" media="all">
+    <!-- <link href="{%static 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css'%}" rel="stylesheet" media="all"> -->
+    <!-- <link href="{%static 'vendor/wow/animate.css'%}" rel="stylesheet" media="all"> -->
+    <!-- <link href="{%static 'vendor/css-hamburgers/hamburgers.min.css'%}" rel="stylesheet" media="all"> -->
+    <!-- <link href="{%static 'vendor/slick/slick.css'%}" rel="stylesheet" media="all"> -->
+    <!-- <link href="{%static 'vendor/select2/select2.min.css'%}" rel="stylesheet" media="all"> -->
+    <link href="{%static 'vendor/perfect-scrollbar/perfect-scrollbar.css'%}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{%static 'css/theme.css'%}" rel="stylesheet" media="all">
+    <style>
+    .row{
+          margin-top: 22px;
+    }
+    </style>
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+              <h4><span style="color:red;">Cancer</span> Detection</h4>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li  id="cancer_detection">
+                            <a href="{%url 'cancer_detection:radius_vs_texture'%}">Radius vs Texture</a>
+                        </li>
+                        <li id="perimeter_vs_area">
+                            <a href="{%url 'cancer_detection:perimeter_vs_area'%}">Perimeter vs Area</a>
+                        </li>
+                        <li id="smoothness_vs_compactness">
+                            <a href="{%url 'cancer_detection:smoothness_vs_compactness'%}">Smoothness vs Compactness</a>
+                        </li>
+                        <li id="concavity_vs_concavepoints">
+                            <a href="{%url 'cancer_detection:concavity_vs_concavepoints'%}">Concavity vs Concavepoints</a>
+                        </li>
+                        <li id="symmetry_vs_fractaldimension">
+                            <a href="{%url 'cancer_detection:symmetry_vs_fractaldimension'%}">Symmetry vs Fractaldimension</a>
+                        </li>
+                        <li id="radius_se_vs_texture_se">
+                            <a href="{%url 'cancer_detection:radius_se_vs_texture_se'%}">Radius-se vs Texture-se</a>
+                        </li>
+                        <li id="perimeter_se_vs_area_se">
+                            <a href="{%url 'cancer_detection:perimeter_se_vs_area_se'%}">Perimeter-se vs Area-se</a>
+                        </li>
+                        <li id="smoothness_se_vs_compactness_se">
+                            <a href="{%url 'cancer_detection:smoothness_se_vs_compactness_se'%}">Smoothness-se vs Compactness-se</a>
+                        </li>
+                        <li id="concavity_se_vs_concavepoints_se">
+                            <a href="{%url 'cancer_detection:concavity_se_vs_concavepoints_se'%}">Concavity-se vs Concavepoints-se</a>
+                        </li>
+                        <li id="symmetry_se_vs_radius_worst">
+                            <a href="{%url 'cancer_detection:symmetry_se_vs_radius_worst'%}">Symmetry-se vs Fractal Dimension Se</a>
+                        </li>
+                        <li id="symmetry_se_vs_radius_worst">
+                            <a href="{%url 'cancer_detection:contact_form'%}">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30" style="position:relative;left:66%;">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu" style="float:right;">
+                                        <div class="image">
+                                            <!-- <img src="{%static 'images/icon/avatar-01.jpg'%}" alt="John Doe" /> -->
+                                        </div>
+                                        <div class="content">
+                                            <a href="#">{{ request.user.first_name }}</a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <!-- <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        <img src="{%static 'images/icon/avatar-01.jpg'%}" alt="John Doe" />
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#">{{ user.get_username }}</a>
+                                                    </h5>
+                                                    <span class="email">johndoe@example.com</span>
+                                                </div>
+                                            </div> -->
+                                            <div class="account-dropdown__body">
+                                              {% if user.is_superuser %}
+                                                <div class="account-dropdown__item">
+                                                    <a href="../admin/">
+                                                        <i class="zmdi zmdi-settings"></i>Admin Site</a>
+                                                </div>
+                                                {%endif%}
+                                            </div>
+                                            <div class="account-dropdown__footer">
+                                                <a href="{%url 'logout'%}">
+                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+           {%block content%}
+           {%endblock%}
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{%static 'vendor/jquery-3.2.1.min.js'%}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{%static 'vendor/bootstrap-4.1/popper.min.js'%}"></script>
+    <script src="{%static 'vendor/bootstrap-4.1/bootstrap.min.js'%}"></script>
+    <!-- Vendor JS       -->
+    <script src="{%static 'vendor/slick/slick.min.js'%}">
+    </script>
+    <script src="{%static 'vendor/wow/wow.min.js'%}"></script>
+    <script src="{%static 'vendor/animsition/animsition.min.js'%}"></script>
+    <script src="{%static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js'%}">
+    </script>
+    <script src="{%static 'vendor/counter-up/jquery.waypoints.min.js'%}"></script>
+    <script src="{%static 'vendor/counter-up/jquery.counterup.min.js'%}">
+    </script>
+    <script src="{%static 'vendor/circle-progress/circle-progress.min.js'%}"></script>
+    <script src="{%static 'vendor/perfect-scrollbar/perfect-scrollbar.js'%}"></script>
+    <script src="{%static 'vendor/select2/select2.min.js'%}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{%static 'js/main.js'%}"></script>
+<script>
+$(document).ready(function(){
+  var location = window.location.pathname;
+  var array_data = location.split('/');
+  var listItems = $("li");
+  listItems.each(function() {
+    var selected_id = $(this).attr('id');
+    if(selected_id === array_data[1]){
+    $(this).addClass('active has-sub');
+    }
+});
+});
+</script>
+</body>
+
+</html>
+<!-- end document-->
